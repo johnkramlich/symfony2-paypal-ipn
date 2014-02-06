@@ -493,7 +493,7 @@ class Ipn
 
         // First check if the order needs an insert or an update
         if (($ipnOrder = $om->getRepository($this->clsIpnOrders)
-                ->findOneByTxnId($this->ipnData['txn_id']))) {
+                ->findOneByTxnId(isset($this->ipnData['txn_id']) ? $this->ipnData['txn_id'] : null))) {
             $this->order->setId($ipnOrder->getId());//Update
             $om->merge($this->order);// Let's save/merge the order down
         } else {
